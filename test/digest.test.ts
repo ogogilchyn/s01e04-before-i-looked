@@ -9,6 +9,7 @@ describe('readNight', () => {
     const night = readNight('runs', '2026-10-28');
     expect(night).not.toBeNull();
     expect(night!.badLines).toBe(1);
+    expect(night!.counts).toEqual({ ok: 10, retry: 4, fail: 1 });
     expect(night!.rows).toHaveLength(5);
     expect(night!.rows.map((row) => row.job)).toEqual([
       'digest/render',
@@ -57,6 +58,10 @@ describe('readNight', () => {
   it('returns no rows for an empty file', () => {
     const dir = mkdtempSync(join(tmpdir(), 'rig-digest-'));
     writeFileSync(join(dir, '2026-10-28.jsonl'), '');
-    expect(readNight(dir, '2026-10-28')).toEqual({ rows: [], badLines: 0 });
+    expect(readNight(dir, '2026-10-28')).toEqual({
+      rows: [],
+      badLines: 0,
+      counts: { ok: 0, retry: 0, fail: 0 },
+    });
   });
 });

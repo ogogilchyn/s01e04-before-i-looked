@@ -15,9 +15,16 @@ export type DigestRow = {
   lastAt: string;
 };
 
+export type StatusCounts = {
+  ok: number;
+  retry: number;
+  fail: number;
+};
+
 export type NightDigest = {
   rows: DigestRow[];
   badLines: number;
+  counts: StatusCounts;
 };
 
 type RawEvent = {
@@ -52,7 +59,8 @@ export function readNight(runsDir: string, night: string): NightDigest | null {
   if (!existsSync(path)) return null;
 
   const text = readFileSync(path, 'utf8');
-  if (text.trim() === '') return { rows: [], badLines: 0 };
+  const counts: StatusCounts = { ok: 0, retry: 0, fail: 0 };
+  if (text.trim() === '') return { rows: [], badLines: 0, counts };
 
   const grouped = new Map<string, RawEvent[]>();
   let badLines = 0;
@@ -71,6 +79,7 @@ export function readNight(runsDir: string, night: string): NightDigest | null {
       badLines += 1;
       continue;
     }
+    counts[event.status] += 1;
     const events = grouped.get(event.job);
     if (events) events.push(event);
     else grouped.set(event.job, [event]);
@@ -92,5 +101,5 @@ export function readNight(runsDir: string, night: string): NightDigest | null {
   });
 
   rows.sort((a, b) => a.job.localeCompare(b.job));
-  return { rows, badLines };
+  return { rows, badLines, counts };
 }
