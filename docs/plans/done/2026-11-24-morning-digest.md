@@ -89,5 +89,5 @@ Done when: the preview link no longer shows the lane marker.
 | 4 | Digest JSON | #1 | Cursor · Grok 4.7 · default | 2026-11-24 |
 | 5 | Board links | #1 | Cursor · Grok 4.7 · default | 2026-11-24 |
 | 6 | Route tests | #1 | Cursor · Grok 4.7 · default | 2026-11-24 |
-| 7 | Preview for review | #2, #3 | Cursor · Grok 4.7 · default | open |
-| 8 | Clean up | #7 | Cursor · Grok 4.7 · default | open |
+| 7 | Preview for review | #2, #3 | Cursor · Grok 4.7 · default | 2026-11-24 |
+| 8 | Clean up | #7 | Cursor · Grok 4.7 · default | 2026-11-24 |

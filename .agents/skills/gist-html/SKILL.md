@@ -17,7 +17,7 @@ gh gist create <file.html> -d "<description>"
 
 ## Replace the same link
 
-Flags from `gh gist edit --help`. Not run yet.
+Ran this. The gist link stays the same.
 
 ```sh
 gh gist edit <id-or-url> --filename <filename> <local-file>
